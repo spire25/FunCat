@@ -4,16 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-	<!-- 
 	<typeAliases>
-		<typeAlias alias="Address" type="spire.md.domain.Address"/>
-		<typeAlias alias="Board" type="spire.md.domain.Board"/>
-		<typeAlias alias="BoardVo" type="spire.md.domain.BoardVo"/>
-	</typeAliases>  -->
-	
-	<!-- 
+		<typeAlias alias="Member" type="team4.md.domain.Member"/>
+	</typeAliases>
+
 	<mappers>
-		<mapper resource="team4/md/mapper/AddressMapper.xml"/>
-	</mappers>  -->
+		<mapper resource="team4/md/mapper/LoginMapper.xml"/>
+	</mappers>
 
 </configuration>

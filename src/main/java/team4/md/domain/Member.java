@@ -17,9 +17,13 @@ public class Member {
 	private String member_email_check;
 	private Date member_rdate;
 	private String member_check;
-
-	Member(String member_id, String member_pw) {
+	
+	public Member(String member_id, String member_pw, String member_name, String member_phone, String member_email_check) {
+		super();
 		this.member_id = member_id;
 		this.member_pw = member_pw;
+		this.member_name = member_name;
+		this.member_phone = member_phone;
+		this.member_email_check = member_email_check;
 	}
 }

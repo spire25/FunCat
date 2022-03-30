@@ -29,10 +29,12 @@
 		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
 	</bean>
 	
-	<!-- 
-	<mybatis-spring:scan base-package="spire.md.mapper"/>
-	<context:component-scan base-package="spire.md.mapper"/>
-	<context:component-scan base-package="spire.md.service"/>  -->
+	
+	<mybatis-spring:scan base-package="team4.md.mapper"/>
+	<context:component-scan base-package="team4.md.mapper"/>
+	<context:component-scan base-package="team4.md.service"/>
+	<context:component-scan base-package="team4.md.domain"/>
+	
 	
 	<!-- logging -->
 	<!-- 
