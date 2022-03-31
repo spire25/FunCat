@@ -10,8 +10,14 @@
 	funcat... 
 </h1>
 
+<br>
+안녕 <span>${username}</span>
+<br>
+
 <P>  The time on the server is ${serverTime}. </P>
 <p><a href="user/login.do"> 로그인 </a></p>
 <p><a href="user/signup.do"> 회원가입 </a></p>
+
+
 </body>
 </html>

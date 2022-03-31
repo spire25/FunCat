@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
 <%@ page session="false" %>
 
 
@@ -132,6 +133,7 @@
 
     <!-- Login Form -->
     <form onsubmit="this.action=get_action">
+      <s:csrfInput/>
       <table border="0" width="100%">
         <tr class="fadeIn second">
           <td class="table_title">이메일</td>

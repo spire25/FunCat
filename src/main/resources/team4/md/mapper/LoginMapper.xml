@@ -5,6 +5,14 @@
 
 <mapper namespace="team4.md.mapper.LoginMapper">
 	<insert id="insert" parameterType="Member">
-		insert into MEMBER values (#{member_id}, #{member_pw}, #{member_name}, #{member_phone}, #{member_email_check}, SYSDATE, 'N')
+		insert into MEMBER values (#{member_id}, #{member_pw}, #{member_name}, #{member_phone}, #{member_email_check}, SYSDATE, 'N', 'ROLE_USER')
 	</insert>
+	
+	<select id="selectById" parameterType="String" resultType="Member">
+		select * from MEMBER where MEMBER_ID=#{member_id}
+	</select>
+	
+	<select id="selectAll" resultType="Member">
+		select * from MEMBER
+	</select>
 </mapper>

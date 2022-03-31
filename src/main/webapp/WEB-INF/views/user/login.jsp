@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
 <%@ page session="false" %>
 
 
@@ -19,7 +20,7 @@
 			$("#member_id").focus();
 			
 			// server 전송
-			$("#btn").on("click", function(){
+			/* $("#btn").on("click", function(){
 				var jsObj = {member_id: $("#member_id").val(), member_pw: $("#member_pw").val()}
 				var jsonData = JSON.stringify(jsObj);
 				
@@ -28,9 +29,12 @@
 					url: "login.json",
 					type: "POST",
 					contentType: "application/json; charset=utf-8",
-					data: jsonData
+					data: jsonData,
+					complete: function(data){
+						
+					}
 				});
-			}); // end of #btn function()
+			}); */ // end of #btn function()
 		});
 	</script>
 </head>
@@ -51,10 +55,15 @@
     </div>
 
     <!-- Login Form -->
-    <form>
-      <input type="text" id="member_id" class="fadeIn second" name="login" placeholder="login" required>
-      <input type="password" id="member_pw" class="fadeIn third" name="login" placeholder="password" required>
-      <input type="button" class="fadeIn fourth" value="Log In" id="btn">
+    <form action="login" method="post">
+      <s:csrfInput/>
+      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+      <input type="text" id="member_id" class="fadeIn second" name="member_id" placeholder="login" required>
+      <input type="password" id="member_pw" class="fadeIn third" name="member_pw" placeholder="password" required>
+      <c:if test="${param.ng!=null}">
+        <p><c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/> </p>
+      </c:if>
+      <input type="submit" class="fadeIn fourth" value="Log In" id="btn">
     </form>
 
     <!-- Remind Passowrd -->
