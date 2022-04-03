@@ -31,7 +31,6 @@ public class LoginRestController {
 	@PostMapping(value="signup")
 	public String signup(@RequestBody Member member) {
 		log.info("#LoginController signup() member: "+ member);
-		member.setMember_pw(new BCryptPasswordEncoder().encode(member.getMember_pw())); 
 		loginService.signupS(member);
 		String str = "success";
 		return str;

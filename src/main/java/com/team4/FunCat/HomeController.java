@@ -12,8 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import team4.md.domain.security.SecurityMember;
-
 /**
  * Handles requests for the application home page.
  */
@@ -35,12 +33,7 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
-		
-		if(authentication != null){
-			SecurityMember member = (SecurityMember)authentication.getPrincipal();
-			model.addAttribute("username", member.getUsername());
-		}
-		
+
 		return "home";
 	}
 	
