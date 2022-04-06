@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
-<%@ page session="false" %>
 
 
 
@@ -20,21 +19,35 @@
 			$("#member_id").focus();
 			
 			// server 전송
-			/* $("#btn").on("click", function(){
-				var jsObj = {member_id: $("#member_id").val(), member_pw: $("#member_pw").val()}
-				var jsonData = JSON.stringify(jsObj);
+			$("#btn").on("click", function(){
+				var data = {member_id: $("#member_id").val(), member_pw: $("#member_pw").val()}
+				//var jsObj = {member_id: $("#member_id").val(), member_pw: $("#member_pw").val()}
+				//var jsonData = JSON.stringify(jsObj);
 				
+				console.log("전송 data: "+data);
 				//console.log(jsonData)
 				$.ajax({
-					url: "login.json",
+					url: "login",
 					type: "POST",
-					contentType: "application/json; charset=utf-8",
-					data: jsonData,
-					complete: function(data){
-						
-					}
+					data: data,
+					dataType: "text",
+					complete: function(result){
+						console.log(result);
+						console.log(result.responseText);
+						if(result.responseText==='<Integer>1</Integer>'){
+							alert("존재하지 않는 id 입니다.")
+							//document.getElementById('idcheckSpan').innerHTML='<span class="blue">사용가능한 이메일입니다.</span>';
+						} else if(result.responseText==='<Integer>2</Integer>'){
+							alert("비밀번호를 다시 확인해주세요.")
+						} else{
+							location.href = "../";
+						} 
+					},
+		    		error: function(){
+		    			console.log("로그인에 실패했습니다.");
+		    		}
 				});
-			}); */ // end of #btn function()
+			}); // end of #btn function()
 		});
 	</script>
 </head>
@@ -51,7 +64,7 @@
 
     <!-- Icon -->
     <div class="fadeIn first">
-      <img src="/imgs/logo.png" id="icon" alt="User Icon" />
+      <img src="/img/logo.png" id="icon" alt="User Icon" />
     </div>
 
     <!-- Login Form -->
@@ -63,7 +76,7 @@
       <c:if test="${param.ng!=null}">
         <p><c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/> </p>
       </c:if>
-      <input type="submit" class="fadeIn fourth" value="Log In" id="btn">
+      <input type="button" class="fadeIn fourth" value="Log In" id="btn">
     </form>
 
     <!-- Remind Passowrd -->

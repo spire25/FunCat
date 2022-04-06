@@ -16,7 +16,11 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/js/**" location="/resources/js/" />
 	<resources mapping="/css/**" location="/resources/css/" />
-	<resources mapping="/imgs/**" location="/resources/imgs/" />
+	<resources mapping="/img/**" location="/resources/img/" />
+	<resources mapping="/fonts/**" location="/resources/fonts/" />
+	<resources mapping="/sass/**" location="/resources/sass/" />
+	
+	
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -24,8 +28,13 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- 유미님 -->
+	<context:component-scan base-package="funcat.bd.controller" />
+	
+	
 	<context:component-scan base-package="com.team4.FunCat" />
 	<context:component-scan base-package="team4.login.controller" />
+	<context:component-scan base-package="team4.project.controller" />
 	
 	
 	<!-- 파일 업로드용 resolver -->

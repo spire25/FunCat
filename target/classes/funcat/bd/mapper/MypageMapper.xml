@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="funcat.bd.mapper.MypageMapper">
+	
+	<!-- 마이페이지 리스트  -->
+	<select id ="mylist" parameterType="Mypage" resultType = "Mypage">
+		select * from MEMBER where MEMBER_ID=#{member_id}
+	</select> 
+	
+	<!-- 아이디로 조회한 정보 -->
+	<select id ="selectByID" parameterType="Mypage" resultType ="Mypage">
+		select * from MEMBER where MEMBER_ID=#{member_id}
+	</select>
+	  
+	 <!-- 마이페이지 수정 업데이트 -->
+	<update id="update" parameterType="Mypage">
+		 update MEMBER 
+		 set 
+		 	MEMBER_NAME=#{member_name}, 
+		 	MEMBER_PW=#{member_pw},
+		    MEMBER_PHONE=#{member_phone} 
+		 where 
+		 	MEMBER_ID=#{member_id}
+    </update>
+    
+    <!-- 내 주문정보 리스트 -->
+	<select id ="orderlist" parameterType="Mypage" resultType = "Mypage">
+		select * from MEM_ORDER where MEMBER_ID=#{member_id,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 내 주문 삭제 -->
+	<delete id="orderDelete" parameterType="long">
+		delete from MEM_ORDER where ORDER_NUM=#{order_num}
+	</delete>  
+	
+	<!-- 크리에이터 정보 조회  -->
+	<select id ="creator" parameterType="Mypage" resultType = "Mypage">
+		select * from CREATOR where MEMBER_ID=#{member_id}
+	</select> 
+	
+	 <!-- 내 프로젝트 리스트 -->
+	<select id ="projectlist" parameterType= "Mypage" resultType = "Mypage">
+		select * from PROJECT where MEMBER_ID=#{member_id}
+	</select>
+
+	<!--  크리에이터 정보 수정폼 -->
+	<select id ="creatorDetail" parameterType= "Mypage" resultType = "Mypage">
+		select * from CREATOR where CREATOR_NUM=#{creator_num}
+	</select>
+	
+	<!-- 크리에이터 정보 업데이트   --> 
+	<update id="creatorUpdate" parameterType="Mypage">
+		 update CREATOR 
+		 set 
+		 	CREATOR_TYPE=#{creator_type},
+		    CREATOR_PHONE=#{creator_phone},
+		    CREATOR_NAME=#{creator_name}
+		 where
+		    CREATOR_NUM=#{creator_num}
+    </update>
+	
+	<!--  내 프로젝트 수정폼 -->
+	<select id ="projectdetail" parameterType= "Mypage" resultType = "Mypage">
+		select * from PROJECT where PROJECT_NUM=#{project_num}
+	</select>
+	
+	<!-- 내 프로젝트 수정 업데이트   --> 
+	<update id="projectUpdate" parameterType="Mypage">
+		 update PROJECT 
+		 set 
+		 	PROJECT_SUB=#{project_sub},
+		 	PROJECT_GOAL=#{project_goal},
+		    PROJECT_COMMENT=#{project_comment},
+		    PROJECT_DETAIL=#{project_detail},
+		    PROJECT_PRICE=#{project_price},
+		    PROJECT_OPEN=#{project_open},
+		    PROJECT_CLOSE=#{project_close},
+		    PROJECT_LEVEL=#{project_level},
+		    PROJECT_MDATE=#{project_mdate},
+		 where
+		    PROJECT_NUM=#{project_num}
+    </update> 
+	
+	<!-- 내 프로젝트 삭제 -->
+	<delete id="delete" parameterType="long">
+		delete from PROJECT where PROJECT_NUM=#{project_num}
+	</delete>  
+
+    
+</mapper>
+	

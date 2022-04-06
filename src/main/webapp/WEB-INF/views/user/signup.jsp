@@ -16,7 +16,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src="/js/signup.js"></script>
 	<script type="text/javascript">
-	
+	var idCheck = 'F';
+	var nameCheck = 'F';
 	
 	$(function() {
 		// 비밀번호 조건
@@ -63,8 +64,62 @@
 	        document.getElementById('member_phone').value = temp;
 	    });
 	    
+	    // email 중복 체크
+	    $("#idcheck").on("click", function(){
+	    	var member_id = document.getElementById("member_id").value;
+	    	
+	    	console.log(member_id);
+	    	$.ajax({
+	    		url: "idcheck",
+	    		type: "post",
+	    		data: {member_id:member_id},
+				dataType: 'JSON',
+	    		success: function(result){
+	    			console.log("result...: "+result);
+	    			if(result != null){
+	    				document.getElementById('idcheckSpan').innerHTML='이미 가입된 이메일입니다.';
+	    				idCheck='F';
+	    			} else{
+	    				console.log("실패");
+	    				idCheck='F';
+	    			}
+				},
+	    		error: function(){
+	    			document.getElementById('idcheckSpan').innerHTML='<span class="blue">사용가능한 이메일입니다.</span>';
+    				idCheck='T';
+	    		}
+	    	});
+	    }); // end of email 중복체크
 	    
-		// server 전송
+	    // name 중복체크
+		$("#namecheck").on("click", function(){
+	    	var member_name = document.getElementById("member_name").value;
+	    	
+	    	console.log(member_name);
+	    	$.ajax({
+	    		url: "namecheck",
+	    		type: "post",
+	    		data: {member_name:member_name},
+				dataType: 'JSON',
+	    		success: function(result){
+	    			console.log("result????? "+result);
+	    			if(result != null){
+	    				document.getElementById("namecheckSpan").innerHTML='사용하고 있는 이름입니다.';
+	    				nameCheck='F';
+	    			} else{
+	    				console.log("실패");
+	    				nameCheck='F';
+	    			}
+	    		},
+	    		error: function(){
+	    			document.getElementById("namecheckSpan").innerHTML='<span class="blue">사용가능한 이름입니다.</span>';
+    				nameCheck='T';
+	    		}
+	    	});
+	    }); // end of name 중복체크
+	    
+	    
+		// 회원가입 server 전송
 		$("#btn").on("click", function get_action(){
 			// 다 채워졌는지 확인
 			var member_id = document.getElementById("member_id").value;
@@ -84,6 +139,7 @@
 			}else if(member_email_check == ""){
 				alert("이메일 수신여부를 확인해주세요.");
 			}else{
+				// 회원가입
 				var jsObj = {member_id: $("#member_id").val(), 
 							member_pw: $("#member_pw").val(),
 							member_name: $("#member_name").val(),
@@ -128,7 +184,7 @@
 
     <!-- Icon -->
     <div class="fadeIn first">
-      <img src="/imgs/logo.png" id="icon" alt="User Icon" />
+      <img src="/img/logo.png" id="icon" alt="User Icon" />
     </div>
 
     <!-- Login Form -->
@@ -139,8 +195,8 @@
           <td class="table_title">이메일</td>
           <td class="table_content">
             <input type="text" id="member_id" class="fadeIn second" name="email" placeholder="email" required autofocus required>
-            <input type="button" class="duplicateCheckBox" name="idcheck" value="중복확인"><br>
-            <span class="red" id="idcheck">* idcheck</span>
+            <input type="button" class="duplicateCheckBox" name="idcheck" id="idcheck" value="중복확인"><br>
+            <span class="red" id="idcheckSpan"></span>
           </td>
         </tr>
         <tr class="fadeIn third">
@@ -161,8 +217,8 @@
           <td class="table_title">회원명</td>
           <td class="table_content">
             <input type="text" id="member_name" class="fadeIn second" name="name" placeholder="name" required>
-            <input type="button" class="duplicateCheckBox" name="namecheck" value="중복확인"><br>
-            <span class="red" id="namecheck">* namecheck</span>
+            <input type="button" class="duplicateCheckBox" name="namecheck" id="namecheck" value="중복확인"><br>
+            <span class="red" id="namecheckSpan"></span>
           </td>
         </tr>
         <tr class="fadeIn sixth">

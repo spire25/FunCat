@@ -1,6 +1,10 @@
 package team4.login.controller;
 
+import java.io.IOException;
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,8 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.log4j.Log4j;
@@ -40,15 +46,24 @@ public class LoginController {
 		return mv;
 	}
 	
+	@GetMapping("logout.do")
+	public void logout(HttpSession session, HttpServletResponse response) throws IOException {
+		session.removeAttribute("user");
+
+		response.sendRedirect("login.do");
+	}
+	
+	
+	
 	
 //	@PostMapping("login")
-//	public void login(@RequestParam("member_id") String member_id, @RequestParam("member_pw") String member_pw) {
+//	public Object login(@RequestParam("member_id") String member_id, @RequestParam("member_pw") String member_pw) {
 //		log.info("#LoginController login()__ member(id, pw): "+ member_id +", "+member_pw);
 ////		ModelAndView mv = new ModelAndView("../");
-////		return mv;
+//		Object result = 0;
+//		return result;
 //	}
 	
-	@GetMapping("../")
 	
 	
 	

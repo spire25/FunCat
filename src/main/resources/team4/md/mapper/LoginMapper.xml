@@ -12,7 +12,15 @@
 		select * from MEMBER where MEMBER_ID=#{member_id}
 	</select>
 	
+	<select id="selectByName" parameterType="String" resultType="Member">
+		select * from MEMBER where MEMBER_NAME=#{member_name}
+	</select>
+	
 	<select id="selectAll" resultType="Member">
 		select * from MEMBER
 	</select>
+	
+	<select id="idCheck" parameterType="String" resultType="int">
+        select COUNT(member_id) from MEMBER where member_id=#{member_id}
+    </select>
 </mapper>
