@@ -2,6 +2,7 @@ package team4.md.service;
 
 import java.util.ArrayList;
 
+import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -85,5 +86,41 @@ public class LoginServiceImpl implements LoginService {
 		return user;
 	}
 	
+	
+	
+	// email 전송
+	public void sendEmail() {
+		// Mail Server 설정
+				String charSet = "utf-8";
+				String hostSMTP = "smtp.naver.com";		
+				String hostSMTPid = "dyy25@naver.com"; // 본인의 아이디 입력		
+				String hostSMTPpwd = "ekdud.6034"; // 비밀번호 입력
+				
+				// 보내는 사람 EMail, 제목, 내용 
+				String fromEmail = "dyy25@naver.com"; // 보내는 사람 eamil
+				String fromName = "Funcat";  // 보내는 사람 이름
+				String subject = "이메일 발송 테스트"; // 제목
+				
+				// 받는 사람 E-Mail 주소
+				String mail = "dyyg25@gmail.com";  // 받는 사람 email		
+				
+				try {
+					HtmlEmail email = new HtmlEmail();
+					email.setDebug(true);
+					email.setCharset(charSet);
+					email.setSSL(true);
+					email.setHostName(hostSMTP);
+					email.setSmtpPort(465);	// SMTP 포트 번호 입력
 
+					email.setAuthentication(hostSMTPid, hostSMTPpwd);
+					email.setTLS(true);
+					email.addTo(mail, charSet);
+					email.setFrom(fromEmail, fromName, charSet);
+					email.setSubject(subject);
+					email.setHtmlMsg("<p>이메일 발송 테스트 입니다. plz...</p>"); // 본문 내용
+					email.send();			
+				} catch (Exception e) {
+					System.out.println(e);
+				}
+	} // end of sendEmail()
 }

@@ -13,4 +13,6 @@ public interface LoginService {
 	
 	int loginS(Member member);
 	Member getUserS(Member member);
+	
+	public void sendEmail();
 }

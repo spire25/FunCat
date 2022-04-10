@@ -81,7 +81,7 @@
 
     <!-- Remind Passowrd -->
     <div id="formFooter">
-      <a class="underlineHover" href="#">Forgot Password?</a>
+      <a class="underlineHover" href="findPw.do">Forgot Password?</a>
     </div>
 
   </div>

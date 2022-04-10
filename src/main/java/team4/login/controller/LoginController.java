@@ -33,26 +33,36 @@ public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@GetMapping("login.do")
-	public ModelAndView login(Locale locale, Model model) {
+	public String login(Locale locale, Model model) {
 		//log.info("#LoginController login()");
-		ModelAndView mv = new ModelAndView("user/login");
-		return mv;
+		//ModelAndView mv = new ModelAndView("user/login");
+		//return mv;
+		return "user/login";
 	}
 	
 	@GetMapping("signup.do")
-	public ModelAndView signup() {
+	public String signup() {
 		//log.info("#LoginController signup()");
-		ModelAndView mv = new ModelAndView("user/signup");
-		return mv;
+		//ModelAndView mv = new ModelAndView("user/signup");
+		//return mv;
+		return "user/signup";
 	}
 	
 	@GetMapping("logout.do")
 	public void logout(HttpSession session, HttpServletResponse response) throws IOException {
 		session.removeAttribute("user");
-
 		response.sendRedirect("login.do");
 	}
 	
+	@GetMapping("findPw.do")
+	public String forgetPw() {
+		log.info("#LoginController forgetPw() log");
+		System.out.println("#LoginController forgetPw() print");
+		
+		return "user/forgetPw";
+	}
+	
+
 	
 	
 	

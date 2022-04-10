@@ -28,5 +28,7 @@
 			<p>  <a href="member/list.do?member_id=${user.member_id}">마이페이지</a></p>
 		</c:otherwise>
 	</c:choose>
+	
+	<p><a href="user/findPw">메일 전송</a></p>
 </body>
 </html>
