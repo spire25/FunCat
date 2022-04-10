@@ -10,4 +10,6 @@ public interface LoginMapper {
 	Member selectByName(String member_name);
 	ArrayList<Member> selectAll();
 	int idCheck(String member_id);
+	
+	int update_pw(Member member);
 }

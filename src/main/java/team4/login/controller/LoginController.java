@@ -55,11 +55,19 @@ public class LoginController {
 	}
 	
 	@GetMapping("findPw.do")
-	public String forgetPw() {
-		log.info("#LoginController forgetPw() log");
-		System.out.println("#LoginController forgetPw() print");
+	public String findPw() {
+		log.info("#LoginController findPw() log");
+		System.out.println("#LoginController findPw() print");
 		
-		return "user/forgetPw";
+		return "user/findPw";
+	}
+	
+	@GetMapping("findEmail.do")
+	public String findEmail() {
+		log.info("#LoginController findEmail() log");
+		System.out.println("#LoginController findEmail() print");
+		
+		return "user/findEmail";
 	}
 	
 

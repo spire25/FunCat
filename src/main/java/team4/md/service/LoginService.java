@@ -2,6 +2,8 @@ package team4.md.service;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletResponse;
+
 import team4.md.domain.Member;
 
 public interface LoginService {
@@ -14,5 +16,6 @@ public interface LoginService {
 	int loginS(Member member);
 	Member getUserS(Member member);
 	
-	public void sendEmail();
+	void findPw(Member member, HttpServletResponse response);
+	void findEmail(Member member, HttpServletResponse response);
 }

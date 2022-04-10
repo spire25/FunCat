@@ -81,7 +81,7 @@
 
     <!-- Remind Passowrd -->
     <div id="formFooter">
-      <a class="underlineHover" href="findPw.do">Forgot Password?</a>
+      <a class="underlineHover" href="findPw.do">이메일/비밀번호 찾기</a>
     </div>
 
   </div>

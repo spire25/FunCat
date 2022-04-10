@@ -1,6 +1,7 @@
 package team4.login.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -64,8 +65,8 @@ public class LoginRestController {
 	@PostMapping("idcheck")
 	@ResponseBody
 	public Member idcheck(@RequestParam("member_id") String member_id) {
-		log.info("==========================test"+member_id);
-		log.debug("==========================test"+member_id);
+		log.info("idcheck"+member_id);
+		log.debug("idcheck"+member_id);
 		Member result = loginService.selectByIdS(member_id);
 		return result;
 	}
@@ -77,11 +78,19 @@ public class LoginRestController {
 		return result;
 	}
 	
-	@GetMapping("findPw")
-	public void forgetPw() {
+	@PostMapping("findPw")
+	public void findPw(Member member, HttpServletResponse response) {
 		log.info("#LoginRestController forgetPw() log");
-		System.out.println("#LoginRestController forgetPw() print");
-		loginService.sendEmail();
+		System.out.println("#LoginRestController forgetPw() print member: "+member);
+		loginService.findPw(member, response);
+		//response.sendRedirect("login.do");
+	}
+	
+	@PostMapping("findEmail")
+	public void findEmail(Member member, HttpServletResponse response) {
+		log.info("#LoginRestController findEmail() log");
+		System.out.println("#LoginRestController findEmail() print member: "+member);
+		loginService.findEmail(member, response);
 		//response.sendRedirect("login.do");
 	}
 }

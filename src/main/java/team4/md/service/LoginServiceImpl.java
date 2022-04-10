@@ -1,5 +1,9 @@
 package team4.md.service;
 
+import javax.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import org.apache.commons.mail.HtmlEmail;
@@ -88,39 +92,123 @@ public class LoginServiceImpl implements LoginService {
 	
 	
 	
+	
+	
+	@Override
+	public void findPw(Member member, HttpServletResponse response) {
+		log.info("##LoginService findPw() log");
+		System.out.println("##LoginService findPw() print member: "+member);
+		
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = null;
+		
+		try {
+			out = response.getWriter();
+		} catch(IOException ie) {
+			log.info("#LoginService findPw() logexception()"+ie);
+			System.out.println("#LoginService findPw() exception()"+ie);
+		}
+			
+		if(loginMapper.idCheck(member.getMember_id()) == 0) {
+			// 존재하지 않는 이메일
+			out.print("가입되지 않은 이메일입니다.");
+			out.close();
+		} else {
+			// 임시 비밀번호 생성
+			String newPw = "";
+			for (int i=0; i<10; i++){
+				newPw += (char) ((Math.random()*26) + 97); // 0~25 / 아스키 97번부터 소문자
+			}
+			
+			member.setMember_pw(newPw);
+			loginMapper.update_pw(member); // pw 변경
+			
+			// pw 변경 메일 전송
+			sendEmail(member, "findPw");
+			
+			out.print("이메일로 임시 비밀번호를 전송하였습니다.");
+			out.close();
+		}
+	} // end of findPw()
 	// email 전송
-	public void sendEmail() {
-		// Mail Server 설정
-				String charSet = "utf-8";
-				String hostSMTP = "smtp.naver.com";		
-				String hostSMTPid = "dyy25@naver.com"; // 본인의 아이디 입력		
-				String hostSMTPpwd = "ekdud.6034"; // 비밀번호 입력
-				
-				// 보내는 사람 EMail, 제목, 내용 
-				String fromEmail = "dyy25@naver.com"; // 보내는 사람 eamil
-				String fromName = "Funcat";  // 보내는 사람 이름
-				String subject = "이메일 발송 테스트"; // 제목
-				
-				// 받는 사람 E-Mail 주소
-				String mail = "dyyg25@gmail.com";  // 받는 사람 email		
-				
-				try {
-					HtmlEmail email = new HtmlEmail();
-					email.setDebug(true);
-					email.setCharset(charSet);
-					email.setSSL(true);
-					email.setHostName(hostSMTP);
-					email.setSmtpPort(465);	// SMTP 포트 번호 입력
+		public void sendEmail(Member member, String flag) {
+			log.info("##LoginService sendEmail() log member: "+member);
+			System.out.println("##LoginService sendEmail() print member: "+member+", flag: "+flag);
+			
+			//LoginService 내 이메일, 비밀번호 없애고 보내기...
+			// Mail Server 설정
+			String charSet = "utf-8";
+			String hostSMTP = "smtp.naver.com";		
+			String hostSMTPid = ""; // 본인의 아이디 입력		
+			String hostSMTPpwd = ""; // 비밀번호 입력
+					
+			// 보내는 사람 EMail, 제목, 내용 
+			String fromEmail = ""; // 보내는 사람 eamil
+			String fromName = "Funcat";  // 보내는 사람 이름
+			String subject = ""; // 제목 밑에 설정
+			String msg = ""; // 내용 밑에 설정
+			
+			
+			// msg 조합 if문
+			if(flag.equals("findPw")) {
+				// String = String+"" 이렇게 가공X 메모리차지함(중간과정 객체 계속 만들어짐)
+				subject = "FunCat 임시 비밀번호 안내";
+				StringBuilder sb = new StringBuilder();
+				sb.append("<p align='center' style='text-align: center;'><b>FunCat 임시비밀번호입니다.</b></p>");
+				sb.append("<p align='center' style='text-align: center; '><b>로그인 후 비밀번호를 변경해주세요.</b></p>");
+				sb.append("<br>");
+				sb.append("<p align='center' style='text-align: center; '>임시비밀번호: ");
+				sb.append(member.getMember_pw());
+				sb.append("</p>");
+				msg = sb.toString();
+			}
+			
+			
+			// 받는 사람 E-Mail 주소
+			String mail = member.getMember_id();  // 받는 사람 email	
+			
+			try {
+				HtmlEmail email = new HtmlEmail();
+				email.setDebug(true);
+				email.setCharset(charSet);
+				email.setSSL(true);
+				email.setHostName(hostSMTP);
+				email.setSmtpPort(465);	// SMTP 포트 번호 입력
 
-					email.setAuthentication(hostSMTPid, hostSMTPpwd);
-					email.setTLS(true);
-					email.addTo(mail, charSet);
-					email.setFrom(fromEmail, fromName, charSet);
-					email.setSubject(subject);
-					email.setHtmlMsg("<p>이메일 발송 테스트 입니다. plz...</p>"); // 본문 내용
-					email.send();			
-				} catch (Exception e) {
-					System.out.println(e);
-				}
-	} // end of sendEmail()
+				email.setAuthentication(hostSMTPid, hostSMTPpwd);
+				email.setTLS(true);
+				email.addTo(mail, charSet);
+				email.setFrom(fromEmail, fromName, charSet);
+				email.setSubject(subject);
+				email.setHtmlMsg(msg); // 본문 내용
+				email.send();			
+			} catch (Exception e) {
+				System.out.println("loginService sendEmail() 예외"+e);
+			}
+		} // end of sendEmail()
+
+		
+		@Override
+		public void findEmail(Member member, HttpServletResponse response) {
+			log.info("##LoginService findEmail() log");
+			System.out.println("##LoginService findEmail() print member: "+member);
+			
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = null;
+			
+			try {
+				out = response.getWriter();
+			} catch(IOException ie) {
+				log.info("#LoginService findEmail() logexception()"+ie);
+				System.out.println("#LoginService findEmail() exception()"+ie);
+			}
+			
+			if(loginMapper.idCheck(member.getMember_id()) == 0) {
+				out.print("미등록");
+				out.close();
+			} else {
+				out.print("등록");
+				out.close();
+			}
+		} // end of findEmail()
 }

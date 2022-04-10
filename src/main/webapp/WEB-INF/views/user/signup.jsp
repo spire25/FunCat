@@ -252,7 +252,7 @@
 
     <!-- Icon -->
     <div class="fadeIn first">
-      <img src="/img/logo.png" id="icon" alt="User Icon" />
+      <a href="login.do"><img src="/img/logo.png" id="icon" alt="User Icon" /></a>
     </div>
 
     <!-- Login Form -->
