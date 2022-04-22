@@ -20,4 +20,14 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectMapper.list();
 	}
 
+	@Override
+	public ArrayList<Project> searchListS(String search_sub) {
+		return projectMapper.searchList(search_sub);
+	}
+
+	@Override
+	public ArrayList<Project> categoryListS(String category) {
+		return projectMapper.categoryList(category);
+	}
+
 }

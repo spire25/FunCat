@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd%22%3E">
+<mapper namespace="funcat.board.mapper.BoardMapper">
+
+<!-- 
+bno - 게시물 번호 - community_num
+title - 게시글 제목 - community_sub
+content - 게시글 내용 - community_con
+writer - 작성자 - member_id
+regdate - 작성날짜 - community_date
+viewCnt- 조회수 - community_view -->
+
+<!-- 리스트 -->
+	<select id="board" resultType="BoardVO">
+		select * from COMMUNITY
+	</select>
+		
+<!-- 게시글 작성 -->
+	<insert id="writer">
+		insert into COMMUNITY(community_num, community_sub, community_con, member_id)
+      values (COMMUNITY_seq.nextval, #{community_sub}, #{community_con}, #{member_id})
+	</insert>
+
+<!-- 게시글 수정 -->
+	 <update id="update">
+		update COMMUNITY
+		set
+		community_sub = #{community_sub},
+		community_con = #{community_con}
+		where community_num = #{community_num}  
+	 </update>
+	 
+<!-- 게시글 삭제 -->
+	 <delete id="delete" parameterType="Integer">
+		delete from	COMMUNITY
+		where community_num = #{community_num}
+	 </delete>
+
+<!-- 게시글 상세페이지 -->
+	<select id="content" parameterType="Integer" resultType="BoardVO">
+		select * from COMMUNITY
+		where community_num = #{community_num}
+	</select>
+	
+<!-- 조회수 업데이트 -->
+	<update id="community_view" parameterType="Integer">
+		update community set community_view = community_view + 1 where community_num = #{community_num}
+	</update>
+	
+</mapper>

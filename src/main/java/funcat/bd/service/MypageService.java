@@ -16,15 +16,25 @@ public interface MypageService {
 	List<Mypage> getMyOrderlist(Mypage mypage);
 	void orderDelete(long order_num);
 	
-	//크리에이터 관리 화면(프로젝트조회)
+	//크리에이터 신청
+	Mypage applyCreatorForm(Mypage mypage);
+	void applyCreator(Mypage mypage);
+	
+	//크리에이터 관리 화면
 	Mypage getCreator(Mypage mypage);
 	List<Mypage> getProjectlist(Mypage mypage);
 	
+	//크리에이터 정보 수정
 	Mypage getCreatordetail(Mypage mypage);
 	void creatorUpdate(Mypage mypage);
 	
+	//크리에이터 프로젝트 수정
 	Mypage getProjectdetail(Mypage mypage);
 	void projectupdate(Mypage mypage);
 	void delete(long project_num);
+	
+	//프로젝트 상세페이지
+	Mypage projectForm(Mypage mypage);
+	List<Mypage> reward(Mypage mypage);
 
 }

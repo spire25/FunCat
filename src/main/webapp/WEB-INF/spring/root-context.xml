@@ -33,12 +33,23 @@
 		<constructor-arg index="0" ref="sqlSessionFactory"/>
 	</bean>
 	
-	<!-- 유미님 -->
+	<!-- mypage / project -->
 	<mybatis-spring:scan base-package="funcat.bd.mapper"/>
 	<context:component-scan base-package="funcat.bd.mapper"/>
 	<context:component-scan base-package="funcat.bd.service"/>
 	
+	<!-- notice / project -->
+	<mybatis-spring:scan base-package="fc.noticeboard.mapper"/>
+	<context:component-scan base-package="fc.noticeboard.domain"/>
+	<context:component-scan base-package="fc.noticeboard.service"/>
 	
+	<!-- board -->
+	<mybatis-spring:scan base-package="funcat.board.mapper"/>
+	<context:component-scan base-package="funcat.board.mapper"/>
+	<context:component-scan base-package="funcat.board.service"/>  
+	<context:component-scan base-package="funcat.board.domain"/> 
+	
+	<!-- login / project -->
 	<mybatis-spring:scan base-package="team4.md.mapper"/>
 	<context:component-scan base-package="team4.md.mapper"/>
 	<context:component-scan base-package="team4.md.service"/>

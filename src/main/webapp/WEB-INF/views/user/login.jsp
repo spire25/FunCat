@@ -64,7 +64,7 @@
 
     <!-- Icon -->
     <div class="fadeIn first">
-      <img src="/img/logo.png" id="icon" alt="User Icon" />
+      <a href="/"><img src="/img/logo.jpg" id="icon" alt="User Icon" /></a>
     </div>
 
     <!-- Login Form -->

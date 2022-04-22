@@ -48,6 +48,16 @@
 			$("#creatorCheck").show();
 		}
 	});
+	
+	$(function(){
+		var applyCheck = "${mypage.member_check}";
+		if(applyCheck != "N") {
+	  		  $("#applyCheck").hide();
+	    }
+		else{
+			$("#applyCheck").show();
+		}
+	});
 
 	$(function(){
 		$('#orderButton').click(function(){
@@ -56,6 +66,16 @@
 		});
 	});
 	
+	$(function(){
+		$('#orderButton').click(function(){
+			var offset = $('#orderTable').offset(); 
+	        $('html').animate({scrollTop : offset.top}, 400);
+		});
+	});
+	
+		function applyCreator(memeberId) {
+			 location.href='applyCreatorForm.do?member_id='+memeberId;
+	   }
 		function update(memeberId) {
 			 location.href='update.do?member_id='+memeberId;
         }
@@ -99,108 +119,79 @@
     </div>
     <!-- Page Preloader END -->
 
-    <!-- Hamburger (only visible on tablets and mobiles) -->
-    <div class="hamburger__menu__overlay"></div>
-    <div class="hamburger__menu__wrapper">
-        <div class="hamburger__menu__logo">
-            <a href="#"><img src="/img/logo.png" alt=""></a>
-        </div>
-        <div class="hamburger__menu__cart">
-            <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-            </ul>
-            <div class="header__cart__price"><span>$10.00</span></div>
-        </div>
-        <div class="hamburger__menu__widget">
-            <div class="header__top__right__language">
-                <img src="/img/language.png" alt="">
-                <div>English</div>
-                <span class="arrow_carrot-down"></span>
-                <ul>
-                    <li><a href="#">Spanish</a></li>
-                    <li><a href="#">English</a></li>
-                </ul>
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="header__top__left">
+                            <ul>
+                                <li><i class="fa fa-envelope"></i> pjfuncat@gmail.com</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="header__top__right">
+     
+                            <div class="header__top__right__language">
+                                <i class="fa fa-user"></i>
+                                <!-- start -->
+								<c:choose>
+							 		<c:when test="${empty sessionScope.user }">
+										<div>로그인</div>
+		                                <span class="arrow_carrot-down"></span>
+		                                <ul>
+		                                    <li><a href="user/login.do">로그인</a></li>
+		                                    <li><a href="user/signup.do">회원가입</a></li>
+		                                </ul>
+									</c:when>
+									<c:otherwise>
+										<div>${user.member_name}님</div>
+		                                <span class="arrow_carrot-down"></span>
+		                                <ul>
+		                                    <li><a href="member/list.do?member_id=${user.member_id}">마이페이지</a></li>
+		                                    <li><a href="user/logout.do" id="project_regist">프로젝트 등록</a></li>
+		                                    <li><a href="user/logout.do">로그아웃</a></li>
+		                                </ul>
+									</c:otherwise>
+								</c:choose>
+                                <!-- end -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
-            </div>
         </div>
-        <nav class="hamburger__menu__nav mobile-menu">
-            <ul>
-                <li class="active"><a href="./index.html">Home</a></li>
-                <li><a href="/shop.html">Shop</a></li>
-                <li><a href="#">Pages</a>
-                    <ul class="header__menu__dropdown">
-                        <li><a href="/shop-details.html">Shop Details</a></li>
-                        <li><a href="/shoping-cart.html">Shoping Cart</a></li>
-                        <li><a href="/checkout.html">Check Out</a></li>
-                        <li><a href="/blog-details.html">Blog Details</a></li>
-                    </ul>
-                </li>
-                <li><a href="/blog.html">Blog</a></li>
-                <li><a href="/contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div id="mobile-menu-wrap"></div>
-        <div class="header__top__right__social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-pinterest-p"></i></a>
-        </div>
-        <div class="hamburger__menu__contact">
-            <ul>
-                <li><i class="fa fa-envelope"></i> info@ogani.com</li>
-                <li>Free shipping for all orders over $50</li>
-            </ul>
-        </div>
-    </div>
-    <!-- Hamburger END -->
-
-    <!-- Header Section (on tablets and mobiles it's hidden) -->
-    <!-- Navigation -->
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="index.html"><img src="/img/logo.png" alt=""></a>
+                        <a href="/"><img src="/img/logo.jpg" width="70%" alt=""></a><!-- img/logo.png -->
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="shop.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
+                            <li><a href="/">홈</a></li>
+                           <!--  <li class="active"><a href="./shop-grid.html">Shop</a></li> -->
+                            <li><a href="#">카테고리</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="/shop-details.html">Shop Details</a></li>
-                                    <li><a href="/shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="/checkout.html">Check Out</a></li>
-                                    <li><a href="/blog-details.html">Blog Details</a></li>
+                                    <li><a href="../project/category?category=영화">영화</a></li>
+                                    <li><a href="../project/category?category=출판">출판</a></li>
+                                    <li><a href="../project/category?category=음악">음악</a></li>
+                                    <li><a href="../project/category?category=잡화">잡화</a></li>
+                                    <li><a href="../project/category?category=뷰티">뷰티</a></li>
                                 </ul>
                             </li>
-                            <li><a href="/blog.html">Blog</a></li>
-                            <li><a href="/contact.html">Contact</a></li>
+                            <li><a href="../notice/list">공지</a></li>
                         </ul>
                     </nav>
                 </div>
-                <div class="col-lg-3">
-                    <div class="header__cart">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-                        </ul>
-                        <div class="header__cart__price"><span>$10.00</span></div>
-                    </div>
-                </div>
-            </div>
-            <div class="hamburger__open">
-                <i class="fa fa-bars"></i>
             </div>
         </div>
     </header>
-    <!-- Header Section END -->
+    <!-- Header Section End -->
 
 
     <!-- Breadcrumb Section Begin -->
@@ -211,7 +202,7 @@
                     <div class="breadcrumb__text">
                         <h2>My page</h2>
                         <div class="breadcrumb__option">
-                            <a href=".">Home</a>
+                            <a href="/">Home</a>
                             <span># My page details, Order check :</span>
                         </div>
                     </div>
@@ -229,10 +220,13 @@
                 <div class="col-lg-12">
                     <div class="contact__form__title">
                  
-						  <h3> <button type="button" class="btn btn-outline-warning" onclick="update('${mypage.member_id}');" input type='submit'>Mypage Modify</button>
-		<button type="button" id="orderButton" class="btn btn-outline-warning">Go OrderList</button>
-		<button type="button" id="creatorCheck" class="btn btn-outline-secondary" onclick="creator('${mypage.member_id}');" input type='submit'>Creator</button></h3>
-		<br>
+						  <!-- <h3> <button type="button" onclick= "location.href='detail.do?project_num=1'" input type='submit'>Go Mypage</button> -->
+						  
+						  <button type="button" id="applyCheck" class="btn btn-warning" onclick="applyCreator('${mypage.member_id}');" input type='submit'>Apply Creator</button>
+						  <button type="button" class="btn btn-outline-warning" onclick="update('${mypage.member_id}');" input type='submit'>Mypage Modify</button>
+						<button type="button" id="orderButton" class="btn btn-outline-warning">Go OrderList</button>
+						<button type="button" id="creatorCheck" class="btn btn-outline-secondary" onclick="creator('${mypage.member_id}');" input type='submit'>Creator</button></h3>
+							<br><br>
 
 	<table class="table">
 	    <tr>
@@ -272,7 +266,7 @@
             </div>
         </div>
 		
-	<table id="orderTable" class="table" style="table-layout : fixed;">
+	<table id="orderTable" class="table" style="table-layout:fixed;">
 	  <h4># Check my order details : </h4>
 	  <br>
 	  <tbody>

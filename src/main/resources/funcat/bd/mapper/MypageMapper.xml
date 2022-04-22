@@ -5,12 +5,12 @@
 	<mapper namespace="funcat.bd.mapper.MypageMapper">
 	
 	<!-- 마이페이지 리스트  -->
-	<select id ="mylist" parameterType="Mypage" resultType = "Mypage">
+	<select id ="mylist" parameterType="Mypage" resultType="Mypage">
 		select * from MEMBER where MEMBER_ID=#{member_id}
 	</select> 
 	
 	<!-- 아이디로 조회한 정보 -->
-	<select id ="selectByID" parameterType="Mypage" resultType ="Mypage">
+	<select id ="selectByID" parameterType="Mypage" resultType="Mypage">
 		select * from MEMBER where MEMBER_ID=#{member_id}
 	</select>
 	  
@@ -26,7 +26,7 @@
     </update>
     
     <!-- 내 주문정보 리스트 -->
-	<select id ="orderlist" parameterType="Mypage" resultType = "Mypage">
+	<select id ="orderlist" parameterType="Mypage" resultType="Mypage">
 		select * from MEM_ORDER where MEMBER_ID=#{member_id,jdbcType=VARCHAR}
 	</select>
 	
@@ -35,13 +35,25 @@
 		delete from MEM_ORDER where ORDER_NUM=#{order_num}
 	</delete>  
 	
+	<!-- 크리에이터 신청 폼 -->
+	<select id = "applyCreatorForm" parameterType="Mypage" resultType="Mypage">
+		select MEMBER_ID from MEMBER where MEMBER_ID=#{member_id}
+	</select>
+
+	<!-- 크리에이터 신청 -->
+	<insert id="applyCreator" parameterType="Mypage" >	
+		insert into Creator
+		values
+		(SEQ_CREATOR_NUM.nextval,#{member_id},#{creator_type},#{creator_phone},#{creator_check},#{creator_name})
+	</insert> 
+	
 	<!-- 크리에이터 정보 조회  -->
-	<select id ="creator" parameterType="Mypage" resultType = "Mypage">
+	<select id ="creator" parameterType="Mypage" resultType="Mypage">
 		select * from CREATOR where MEMBER_ID=#{member_id}
 	</select> 
 	
 	 <!-- 내 프로젝트 리스트 -->
-	<select id ="projectlist" parameterType= "Mypage" resultType = "Mypage">
+	<select id ="projectlist" parameterType= "Mypage" resultType="Mypage">
 		select * from PROJECT where MEMBER_ID=#{member_id}
 	</select>
 
@@ -78,7 +90,7 @@
 		    PROJECT_OPEN=#{project_open},
 		    PROJECT_CLOSE=#{project_close},
 		    PROJECT_LEVEL=#{project_level},
-		    PROJECT_MDATE=#{project_mdate},
+		    PROJECT_MDATE=#{project_mdate}
 		 where
 		    PROJECT_NUM=#{project_num}
     </update> 
@@ -87,7 +99,20 @@
 	<delete id="delete" parameterType="long">
 		delete from PROJECT where PROJECT_NUM=#{project_num}
 	</delete>  
-
+	
+	<!-- 프로젝트 화면 -->
+	<select id ="projectForm" parameterType= "Mypage" resultType = "Mypage">
+	  	select A.*, B.CATEGORY_SUB
+		from PROJECT A, CATEGORY B
+		where A.CATEGORY_NUM = B.CATEGORY_NUM
+		and A.PROJECT_NUM=#{project_num}
+	</select>
+	
+	<!-- 리워드 리스트 -->
+	<select id="reward" parameterType="Mypage" resultType="Mypage">
+		select * from REWARD where PROJECT_NUM=#{project_num}
+	</select>
+	
     
 </mapper>
 	

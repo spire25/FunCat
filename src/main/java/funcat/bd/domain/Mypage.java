@@ -32,7 +32,7 @@ public class Mypage {
 	private String order_option;
 	private String order_delivery;
 	
-	//크리에이터 조회
+	//크리에이터 신청, 조회
 	private long creator_num;
 	private String creator_type;
 	private String creator_phone;
@@ -52,4 +52,14 @@ public class Mypage {
 	private Date project_date;
 	private Date project_mdate;
 	private String project_level;
+	private String project_thumbnail;
+	
+	//카테고리
+	private String category_sub;
+	
+	//리워드
+	private String reward_sub;
+	private long reward_price;
+	private long reward_cnt;
+	private Date reward_date;
 }

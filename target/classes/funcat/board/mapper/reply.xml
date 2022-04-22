@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd%22%3E">
+<mapper namespace="funcat.board.mapper.reply">
+<!-- bno - 게시물 번호 - community_num
+writer - 작성자 - member_id
+content - 내용 - com_re_con
+regdate - 작성날짜 - com_re_date
+rno - 댓글번호 - com_re_num -->
+
+<!-- 댓글 작성 -->
+<insert id="replyWrite" parameterType="funcat.board.domain.ReplyVO">
+    insert into community_reply(community_num, member_id, com_re_con, com_re_date)
+        value(#{community_num}, #{member_id}, #{content}, #{regDate})
+</insert>
+    
+<!-- 댓글 수정 -->
+<update id="replyModify" parameterType="funcat.board.domain.ReplyVO">
+    update community_reply set
+        member_id = #{member_id},
+        com_re_con = #{com_re_con}
+    where com_re_num = #{com_re_num}
+        and community_num = #{community_num}    
+</update>
+
+<!-- 댓글 삭제 -->
+<delete id="replyDelete" parameterType="funcat.board.domain.ReplyVO">
+    delete from community_reply
+    where com_re_num = #{com_re_num}
+        and community_num = ${community_num}    
+</delete>

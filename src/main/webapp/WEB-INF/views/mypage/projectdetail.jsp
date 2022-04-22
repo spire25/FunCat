@@ -56,7 +56,7 @@
 				 project_price: document.getElementById('pjprice').value,
 				 project_open: document.getElementById('pjopen').value,
 				 project_close: document.getElementById('pjclose').value,			 
-				 project_level: document.getElementById('pjlevel').value
+				 project_level: document.getElementById('level').value
 			 } )
 				 .done(function( data ) {
 				if(data == "ok"){
@@ -167,7 +167,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="index.html"><img src="/img/logo.png" alt=""></a>
+                        <a href="index.html"><img src="/img/funcat.jpg" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -282,7 +282,13 @@
 		  </tr>
 		  <tr>
 		    <td>Level</td>
-		    <td><textarea id='pjlevel' name='project_level' rows='1' >${mypage.project_level}</textarea></td>
+		    <td><select id= "level" name="level" >
+		  		  <option disabled selected>펀딩상태지정</option>
+			    <option value="펀딩대기">펀딩대기</option>
+			    <option value="펀딩중">펀딩중</option>
+			    <option value="펀딩완료">펀딩완료</option>
+			    <option value="펀딩실패">펀딩실패</option>
+			</select></td>
 		  </tr>
 		   </tbody>
 		</table>

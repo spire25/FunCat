@@ -49,7 +49,7 @@
 			if (confirm("수정하시겠습니까??") == true){    //확인				
 			$.post( "creatordetailupdate.do", { 
 				creator_num: ${mypage.creator_num},
-				creator_type: document.getElementById('crtype').value,
+				creator_type: document.getElementById('yn').value,
 				creator_phone: document.getElementById('crphone').value,
 				creator_name: document.getElementById('crname').value
 			} )
@@ -72,7 +72,7 @@
 	tr {
 		text-align: center;
 		}
-	
+
 	* {
 	     box-sizing: border-box;
 	        
@@ -83,7 +83,7 @@
 	    font-size: 12px;
 	    background-color:#FAED7D; 
 	      }
-	
+	      
 	</style>
 </head>
 
@@ -159,7 +159,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="index.html"><img src="/img/logo.png" alt=""></a>
+                        <a href="index.html"><img src="/img/funcat.jpg" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -242,7 +242,11 @@
 		  </tr>
 		  <tr>
 		    <td>사업자 여부</td>
-		    <td><textarea id='crtype' style="resize: none;" name='creator_type' rows='1' cols='20' >${mypage.creator_type}</textarea></td>
+		    <td><select id= "yn" name="yn" >
+		  		  <option disabled selected>Y/N</option>
+			    <option value="Y">Y</option>
+			    <option value="N">N</option>
+			</select></td>
 		  </tr>
 		  <tr>
 		    <td>Contact</td>

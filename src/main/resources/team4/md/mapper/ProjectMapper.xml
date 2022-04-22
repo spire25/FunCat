@@ -5,6 +5,14 @@
 
 <mapper namespace="team4.md.mapper.ProjectMapper">
 	<select id="list" resultType="Project">
-		select * from project
+		select * from PROJECT where PROJECT_LEVEL='펀딩중' order by PROJECT_OPEN
+	</select>
+	
+	<select id="searchList" resultType="Project" parameterType="String">
+		select * from PROJECT where PROJECT_SUB like '%'||#{search_sub}||'%' order by PROJECT_OPEN
+	</select>
+	
+	<select id="categoryList" resultType="Project" parameterType="String">
+		select * from PROJECT where CATEGORY_NUM=(select CATEGORY_NUM from CATEGORY where CATEGORY_SUB=#{category}) order by PROJECT_OPEN
 	</select>
 </mapper>

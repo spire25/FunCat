@@ -24,6 +24,22 @@ public class MypageController {
 	private MypageService mypageService;
 	
 	//로그인
+	
+	//프로젝트 상세페이지
+	@GetMapping("/detail.do")
+	public ModelAndView detail(long project_num) {
+		Mypage project = new Mypage();
+		project.setProject_num(project_num);
+		
+		Mypage mypage = mypageService.projectForm(project);
+		List<Mypage> reward = mypageService.reward(project);
+		
+		ModelAndView mv = new ModelAndView("mypage/detail");
+		mv.addObject("mypage", mypage); 
+		mv.addObject("reward", reward);
+		return mv; 
+
+	}
 
 	//마이페이지 조회
 	@GetMapping("/list.do")
@@ -66,7 +82,25 @@ public class MypageController {
 		return "ok";
 	}
 	
-	//크리에이터조회
+	//크리에이터 신청
+	@GetMapping("/applyCreatorForm.do")
+	public ModelAndView applyCreatorForm(String member_id) {
+		Mypage mypageParam = new Mypage();
+		mypageParam.setMember_id(member_id);	
+		Mypage mypage = mypageService.applyCreatorForm(mypageParam);
+	    ModelAndView mv = new ModelAndView("mypage/applyCreatorForm");
+		mv.addObject("mypage", mypage);
+		return mv;
+	}
+	
+	@PostMapping("applyCreator.do")
+	@ResponseBody
+	public String applyCreator(Mypage mypage) {
+		mypageService.applyCreator(mypage);
+		return "ok";
+	}
+	
+	//크리에이터 조회
 	@GetMapping("/creator.do")
 	public ModelAndView creator(String member_id) {
 		Mypage mypageParam = new Mypage();

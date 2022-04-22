@@ -40,8 +40,20 @@ public class MypageServiceImpl implements MypageService {
 	}
 	
 	//내 주문 취소
+	@Override
 	public void orderDelete(long order_num) {
 		mypageMapper.orderDelete(order_num);				
+	}
+	
+	//크리에이터 신청
+	@Override
+	public Mypage applyCreatorForm(Mypage mypage) {
+		return mypageMapper.applyCreatorForm(mypage);
+	}
+	
+	@Override
+	public void applyCreator(Mypage mypage) {
+		mypageMapper.applyCreator(mypage);
 	}
 	
 	//크리에이터 관리 화면(프로젝트조회)
@@ -80,8 +92,19 @@ public class MypageServiceImpl implements MypageService {
 	}
 	
 	//크리에이터 관리 화면(프로젝트삭제)
+	@Override
 	public void delete(long project_num) {
 		mypageMapper.delete(project_num);				
 	}
 	
+	//프로젝트 상세페이지
+	@Override
+	public Mypage projectForm(Mypage mypage) {
+		return mypageMapper.projectForm(mypage);
+	}
+	
+	@Override
+	public List<Mypage> reward(Mypage mypage) {
+		return mypageMapper.reward(mypage);
+	}
 }

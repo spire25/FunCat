@@ -68,7 +68,7 @@ public class LoginServiceImpl implements LoginService {
 			if(dbPw != null) dbPw.trim();
 			
 			if(dbPw.equals(member_pw)) {
-				System.out.println("service ///////////////?   member  "+member);
+				System.out.println("loginService member  "+member);
 				return CORRECT_ID_PWD; 
 			} else {
 				System.out.println("db pwd"+dbPw);
@@ -138,12 +138,12 @@ public class LoginServiceImpl implements LoginService {
 			//LoginService 내 이메일, 비밀번호 없애고 보내기...
 			// Mail Server 설정
 			String charSet = "utf-8";
-			String hostSMTP = "smtp.naver.com";		
-			String hostSMTPid = ""; // 본인의 아이디 입력		
-			String hostSMTPpwd = ""; // 비밀번호 입력
+			String hostSMTP = "smtp.gmail.com";		
+			String hostSMTPid = "pjfuncat@gmail.com"; // 본인의 아이디 입력		
+			String hostSMTPpwd = "pjFuncat!1"; // 비밀번호 입력
 					
 			// 보내는 사람 EMail, 제목, 내용 
-			String fromEmail = ""; // 보내는 사람 eamil
+			String fromEmail = "pjfuncat@gmail.com"; // 보내는 사람 eamil
 			String fromName = "Funcat";  // 보내는 사람 이름
 			String subject = ""; // 제목 밑에 설정
 			String msg = ""; // 내용 밑에 설정
@@ -173,7 +173,7 @@ public class LoginServiceImpl implements LoginService {
 				email.setCharset(charSet);
 				email.setSSL(true);
 				email.setHostName(hostSMTP);
-				email.setSmtpPort(465);	// SMTP 포트 번호 입력
+				email.setSmtpPort(587);	// SMTP 포트 번호 입력
 
 				email.setAuthentication(hostSMTPid, hostSMTPpwd);
 				email.setTLS(true);

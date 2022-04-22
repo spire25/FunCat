@@ -17,15 +17,24 @@ public interface MypageMapper {
 	List<Mypage> orderlist(Mypage mypage);
 	void orderDelete(long order_num);
 	
-	//크리에이터 관리 화면(프로젝트)
+	//크리에이터 신청 
+	Mypage applyCreatorForm(Mypage mypage);
+	void applyCreator(Mypage mypage);
+	
+	//크리에이터 관리 화면
 	Mypage creator(Mypage mypage);
 	List<Mypage> projectlist(Mypage mypage);
 	
 	Mypage creatorDetail(Mypage mypage);
 	void creatorUpdate(Mypage mypage);
 	
+	// 프로젝트 조회, 수정
 	Mypage projectdetail(Mypage mypage);
 	void projectUpdate(Mypage mypage);
 	void delete(long project_num);
+	
+	// 프로젝트 상세페이지
+	Mypage projectForm(Mypage mypage);
+	List<Mypage> reward(Mypage mypage);
 	
 }
